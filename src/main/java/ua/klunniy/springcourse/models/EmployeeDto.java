@@ -7,22 +7,20 @@ import ua.klunniy.springcourse.enums.Gender;
 /**
  * @author Serhii Klunniy
  */
-
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Person {
+public class EmployeeDto {
 
-    int id;
     String firstName;
     String lastName;
     String email;
     Gender gender;
 
-    public Person(int id, String firstName) {
-        this.id = id;
-        this.firstName = firstName;
-    }
+    public String getFullName() {return firstName.concat(" ").concat(lastName);}
+
+    public boolean isMan() {return Gender.MALE.equals(gender);}
+
 }
