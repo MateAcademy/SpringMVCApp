@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
-    <meta charset="ISO-8859-1">
-    <title>hello</title>
+    <meta charset="UTF-8">
+    <title>Person</title>
 </head>
 <body>
 
-<p>hello ))</p>
-<a href="/first/goodbye"> Say good bye </a> or <a href="/exit">Exit </a> or
-<a href="/first/hello?name=Root&surname=Jone">Requesr with parameters</a>
-
-<p th:text="${message}" />
+<p th:text="${person.getName()}">NAME</p>
+<p th:text="${person.getId()}">ID</p>
 
 </body>
 </html>
