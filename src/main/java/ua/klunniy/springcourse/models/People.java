@@ -1,12 +1,19 @@
 package ua.klunniy.springcourse.models;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Serhii Klunniy
  */
-@Controller
-@RequestMapping("/people")
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class People {
+
+    private int id;
+    private String name;
+
 }
