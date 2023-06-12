@@ -15,8 +15,23 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/first")
 public class FirstController {
 
+    private static final String SELECT_ALL_BY_TOPIC_NAME =
+            """
+                            SELECT question.id,text,topic_id,
+                            name FROM public.question
+                            FULL JOIN public.topic ON
+                            question.topic_id = topic.id WHERE name = ?
+                    """;
+
+    private static final String SELECT_ALL_BY_TOPIC_NAME2 = "SELECT question.id,text,topic_id, name FROM public.question " +
+            "FULL JOIN public.topic ON question.topic_id " +
+            "= topic.id WHERE name = ? ";
+
     @GetMapping("/hello")
     public String helloPage(HttpServletRequest request) {
+
+
+
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         System.out.println("Hello " + name + " " + surname);
