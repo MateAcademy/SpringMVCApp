@@ -1,5 +1,6 @@
 package ua.klunniy.springcourse.dao;
 
+import org.springframework.stereotype.Component;
 import ua.klunniy.springcourse.models.Person;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * @author Serhii Klunniy
  */
+@Component
 public class PersonDAO {
     private static int PEOPLE_COUNT;
     private List<Person> people;
