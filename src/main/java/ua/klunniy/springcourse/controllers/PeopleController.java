@@ -3,10 +3,9 @@ package ua.klunniy.springcourse.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.klunniy.springcourse.dao.PersonDAO;
+import ua.klunniy.springcourse.models.Person;
 
 /**
  * @author Serhii Klunniy
@@ -33,5 +32,20 @@ public class PeopleController {
         //Получим одного человека по id из DAO и передадим на отображение в представление
         model.addAttribute("person", personDAO.show(id));
         return "people/show"; //будет отображать одного человека
+    }
+
+    @PostMapping()
+    public String create(@RequestParam("name") String name, @RequestParam("surname") String surname,
+                         @RequestParam("email") String email, Model model) {
+        Person person = new Person();
+        person.setName(name);
+        person.setSurname(surname);
+        person.setEmail(email);
+
+        //Добавляем человека в БД
+
+        model.addAttribute("person", person);
+
+        return "successPage";
     }
 }

@@ -17,6 +17,7 @@ public class Person {
 
     int id;
     String name;
+    String surname;
     String lastName;
     String email;
     Gender gender;
