@@ -17,12 +17,11 @@ public class PeopleController {
 
     private final PersonDAO personDAO;
 
-    @Autowired
     public PeopleController(PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
-    @GetMapping
+    @GetMapping()
     public String index(Model model) {
         //этот метод будет возвращать список из людей, получим всех людей из DAO и передадим на отображение в представление
         model.addAttribute("people", personDAO.index());

@@ -16,13 +16,13 @@ import ua.klunniy.springcourse.enums.Gender;
 public class Person {
 
     int id;
-    String firstName;
+    String name;
     String lastName;
     String email;
     Gender gender;
 
-    public Person(int id, String firstName) {
+    public Person(int id, String name) {
         this.id = id;
-        this.firstName = firstName;
+        this.name = name;
     }
 }
