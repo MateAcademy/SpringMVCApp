@@ -22,14 +22,15 @@ public class PeopleController {
 
     @GetMapping()
     public String index(Model model) {
-        //этот метод будет возвращать список из людей, получим всех людей из DAO и передадим на отображение в представление
+        //этот метод будет возвращать список из людей,
+        // получим всех людей из DAO и передадим на отображение в представление
         model.addAttribute("people", personDAO.index());
         return "people/index"; // здесь мы вернем тот шаблон, ту страницу что будет отображать список из людей
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        //Получим одного человека по id из DAO и передадим на отображение в представление
+        //Получим одного человека по его id из DAO и передадим на отображение в представление
         model.addAttribute("person", personDAO.show(id));
         return "people/show"; //будет отображать одного человека
     }

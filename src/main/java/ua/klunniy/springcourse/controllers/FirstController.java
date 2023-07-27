@@ -45,7 +45,7 @@ public class FirstController {
                 case "subtraction" -> result = a - b;
                 case "division" -> result = (double) a / b;
             }
-        model.addAttribute("message", "Answer: " + result);
+        model.addAttribute("message", "Answer2: " + result);
         return "first/calculator";
     }
 

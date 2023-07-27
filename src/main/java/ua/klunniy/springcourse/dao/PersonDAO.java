@@ -23,10 +23,12 @@ public class PersonDAO {
         people.add(new Person(++PEOPLE_COUNT, "Kate"));
     }
 
+    //в этом методе мы просто возвращаем список из людей
     public List<Person> index() {
         return people;
     }
 
+    //второй метод возвращает одного человека
     public Person show(int id) {
         return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
     }
