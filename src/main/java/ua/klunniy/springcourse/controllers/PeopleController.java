@@ -16,10 +16,12 @@ public class PeopleController {
 
     private final PersonDAO personDAO;
 
+    @Autowired
     public PeopleController(PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
+    //показываем список из людей по адресу GET /people
     @GetMapping()
     public String index(Model model) {
         //этот метод будет возвращать список из людей,
@@ -28,6 +30,7 @@ public class PeopleController {
         return "people/index"; // здесь мы вернем тот шаблон, ту страницу что будет отображать список из людей
     }
 
+    //показываем страницу одного человека по адресу GET /people:id
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         //Получим одного человека по его id из DAO и передадим на отображение в представление

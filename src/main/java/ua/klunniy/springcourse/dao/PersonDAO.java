@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * @author Serhii Klunniy
- *
  */
 @Component
 public class PersonDAO {
