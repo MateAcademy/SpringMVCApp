@@ -52,4 +52,20 @@ public class PeopleController {
 
         return "successPage";
     }
+
+    @GetMapping("/new")
+    public String newPerson(Model model) {
+        model.addAttribute("person", new Person());
+        return "people/new";
+    }
+
+    @ModelAttribute("headerMessage")
+    public String populateHeaderMessage() {
+        return "Welcome to our website";
+    }
+
+    public String create(@ModelAttribute("person") Person person) {
+        personDAO.save(person);
+        return "redirect:/people";
+    }
 }

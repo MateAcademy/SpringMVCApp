@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class PersonDAO {
     private static int PEOPLE_COUNT;
-    private List<Person> people;
+    private static List<Person> people;
 
     {
         people = new ArrayList<>();
@@ -35,5 +35,11 @@ public class PersonDAO {
     public static void main(String[] args) {
         PersonDAO personDAO = new PersonDAO();
         System.out.println(personDAO.show(2));
+    }
+
+    public static void save(Person person) {
+        if (person!=null) {
+            people.add(person);
+        }
     }
 }

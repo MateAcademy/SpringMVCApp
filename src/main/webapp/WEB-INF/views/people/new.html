@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>All people</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+    <div> <!--  label ?????? ???????? ???? ????? ?????? ???? ???????:-->
+        <label for="name">Name</label>
+        <!--  input ??? ???, ??????? ??????? ???? ??? ?????-->
+        <input name="name" type="text" th:field="*{name}" id="name"/>
+
+        <br>
+
+        <label for="surname">Surname</label>
+        <input name="surname" type="text" th:field="*{surname}" id="surname"/>
+
+        <br>
+
+        <label for="email">Email</label>
+        <input name="email" type="text" th:field="*{email}" id="email"/>
+
+        <br>
+
+        <input type="submit" value="Add Person"/>
+    </div>
+</form>
+
+</body>
+</html>
