@@ -38,7 +38,8 @@ public class PersonDAO {
     }
 
     public static void save(Person person) {
-        if (person!=null) {
+        if (person != null) {
+            person.setId(++PEOPLE_COUNT);
             people.add(person);
         }
     }
