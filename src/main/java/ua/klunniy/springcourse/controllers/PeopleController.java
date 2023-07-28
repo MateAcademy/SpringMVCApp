@@ -38,7 +38,7 @@ public class PeopleController {
         return "people/show"; //будет отображать одного человека
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public String create(@RequestParam("name") String name, @RequestParam("surname") String surname,
                          @RequestParam("email") String email, Model model) {
         Person person = new Person();
@@ -46,7 +46,7 @@ public class PeopleController {
         person.setSurname(surname);
         person.setEmail(email);
 
-        //Добавляем человека в БД
+         //Добавляем человека в БД
 
         model.addAttribute("person", person);
 
@@ -64,6 +64,7 @@ public class PeopleController {
         return "Welcome to our website";
     }
 
+    @PostMapping
     public String create(@ModelAttribute("person") Person person) {
         personDAO.save(person);
         return "redirect:/people";
