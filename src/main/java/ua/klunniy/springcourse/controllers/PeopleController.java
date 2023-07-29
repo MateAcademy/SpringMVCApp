@@ -63,6 +63,8 @@ public class PeopleController {
 //    }
 
     //Этот метод будет возвращать html форму для создания нового человека
+    //мы не посылаем поля для обьекта класса Person
+    //ModelAttribute создаст пустой обьект класса Person и поместит его в Model
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
         return "people/new";
@@ -71,6 +73,10 @@ public class PeopleController {
     //а второй метод будет принимать на вход POST запрос, будет брать данные из этого запроса,
     @PostMapping
     public String create(@ModelAttribute("person") Person person) {
+        //создает обьект
+        //считывает данные из поля
+        //помещает эти данные в обьект
+        //помещает обьект в модель
         personDAO.save(person);
         return "redirect:/people";
     }
