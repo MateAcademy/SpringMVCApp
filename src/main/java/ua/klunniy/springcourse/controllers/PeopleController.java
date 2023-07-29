@@ -31,6 +31,8 @@ public class PeopleController {
     }
 
     //показываем страницу одного человека по адресу GET /people:id
+    //это означает что мы поместим число и это число передастся в аргументы метода, с помощью аннотации
+    //PathVariable мы извлечем id из url-a из адреса и получи м доступ к id внутри метода
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         //Получим одного человека по его id из DAO и передадим на отображение в представление
@@ -46,26 +48,35 @@ public class PeopleController {
         person.setSurname(surname);
         person.setEmail(email);
 
-         //Добавляем человека в БД
+        //Добавляем человека в БД
 
         model.addAttribute("person", person);
 
         return "successPage";
     }
 
+//    @GetMapping("/new")
+//    public String newPerson(Model model) {
+//        model.addAttribute("person", new Person());
+//        return "people/new";
+//
+//    }
+
+    //Этот метод будет возвращать html форму для создания нового человека
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
         return "people/new";
     }
 
-    @ModelAttribute("headerMessage")
-    public String populateHeaderMessage() {
-        return "Welcome to our website";
-    }
-
+    //а второй метод будет принимать на вход POST запрос, будет брать данные из этого запроса,
     @PostMapping
     public String create(@ModelAttribute("person") Person person) {
         personDAO.save(person);
         return "redirect:/people";
+    }
+
+    @ModelAttribute("headerMessage")
+    public String populateHeaderMessage() {
+        return "Welcome to our website";
     }
 }
