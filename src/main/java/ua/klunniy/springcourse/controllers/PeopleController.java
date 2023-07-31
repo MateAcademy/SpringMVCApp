@@ -14,6 +14,24 @@ import ua.klunniy.springcourse.models.Person;
 @RequestMapping("/people")
 public class PeopleController {
 
+   /**
+    * REST описывает то какие URLы и HTTP методы у нас должны быть для взаимодействия с данными
+    *
+    *
+    *   С GET запросом вот по этому URL мы получим все записи:
+    *   GET     /post               Получаем все записи(READ)
+    *
+    *   GET     /posts/:id          Получаем одну запись(READ)
+    *   DELETE  /posts/:id          Удаляем запись(DELETE)
+    *
+    *   GET     /post/new           HTML форма создания записи
+    *   POST    /post               Создаем новую запись(CREATE)
+    *
+    *   GET     /posts/:id/edit     HTML форма редактирования записи
+    *   PATCH   /posts/:id          Обновляем запись(UPDATE)
+    *
+    * */
+
     private final PersonDAO personDAO;
 
     @Autowired
@@ -25,7 +43,7 @@ public class PeopleController {
     @GetMapping()
     public String index(Model model) {
         //этот метод будет возвращать список из людей,
-        // получим всех людей из DAO и передадим на отображение в представление
+        // Получим всех людей из DAO и передадим на отображение в представление
         model.addAttribute("people", personDAO.index());
         return "people/index"; // здесь мы вернем тот шаблон, ту страницу что будет отображать список из людей
     }
