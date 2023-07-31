@@ -109,7 +109,7 @@ public class PeopleController {
     public String edit(@PathVariable("id") int id, Model model) {
         //Получим одного человека по его id из DAO и передадим на отображение в представление
         model.addAttribute("person", personDAO.show(id));
-        return "people/edit"; //будет отображать форму для редактирования одного человека
+        return "people/edit"; //Этот метод будет отображать форму для редактирования одного человека
     }
 
     @PatchMapping("/{id}")
