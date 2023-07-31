@@ -78,11 +78,31 @@ public class PeopleController {
         //помещает эти данные в обьект
         //помещает обьект в модель
         personDAO.save(person);
+        // return "redirect:/people";
         return "redirect:/people";
     }
 
     @ModelAttribute("headerMessage")
     public String populateHeaderMessage() {
         return "Welcome to our website";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model) {
+        //Получим одного человека по его id из DAO и передадим на отображение в представление
+        model.addAttribute("person", personDAO.show(id));
+        return "people/edit"; //будет отображать форму для редактирования одного человека
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
+        personDAO.update(id, person);
+        return "redirect:/people";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        personDAO.delete(id);
+        return "redirect:/people";
     }
 }
