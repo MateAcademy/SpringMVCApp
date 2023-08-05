@@ -1,6 +1,5 @@
 package ua.klunniy.springcourse.controllers;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +7,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.klunniy.springcourse.dao.PersonDAO;
 import ua.klunniy.springcourse.models.Person;
+
+
+import javax.validation.Valid;
 
 /**
  * @author Serhii Klunniy
@@ -118,7 +120,7 @@ public class PeopleController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") @Valid Person person,BindingResult bindingResult, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors()){
             return "people/edit";
         }
