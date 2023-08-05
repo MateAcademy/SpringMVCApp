@@ -16,10 +16,10 @@ public class PersonDAO {
 
     {
         people = new ArrayList<>();
-        people.add(new Person(++PEOPLE_COUNT, "Tom"));
-        people.add(new Person(++PEOPLE_COUNT, "Bob"));
-        people.add(new Person(++PEOPLE_COUNT, "Mike"));
-        people.add(new Person(++PEOPLE_COUNT, "Kate"));
+        people.add(new Person(++PEOPLE_COUNT, 24, "Tom"));
+        people.add(new Person(++PEOPLE_COUNT, 34, "Bob"));
+        people.add(new Person(++PEOPLE_COUNT, 44, "Mike"));
+        people.add(new Person(++PEOPLE_COUNT, 54, "Kate"));
     }
 
     //в этом методе мы просто возвращаем список из людей
@@ -49,6 +49,7 @@ public class PersonDAO {
         personToBeUpdated.setName(updatePerson.getName());
         personToBeUpdated.setSurname(updatePerson.getSurname());
         personToBeUpdated.setEmail(updatePerson.getEmail());
+        personToBeUpdated.setAge(updatePerson.getAge());
     }
 
     public void delete(int id) {

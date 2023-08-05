@@ -1,8 +1,10 @@
 package ua.klunniy.springcourse.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.klunniy.springcourse.dao.PersonDAO;
 import ua.klunniy.springcourse.models.Person;
@@ -58,20 +60,20 @@ public class PeopleController {
         return "people/show"; //будет отображать одного человека
     }
 
-    @PostMapping("/create")
-    public String create(@RequestParam("name") String name, @RequestParam("surname") String surname,
-                         @RequestParam("email") String email, Model model) {
-        Person person = new Person();
-        person.setName(name);
-        person.setSurname(surname);
-        person.setEmail(email);
-
-        //Добавляем человека в БД
-
-        model.addAttribute("person", person);
-
-        return "successPage";
-    }
+//    @PostMapping("/create")
+//    public String create(@RequestParam("name") String name, @RequestParam("surname") String surname,
+//                         @RequestParam("email") String email, Model model) {
+//        Person person = new Person();
+//        person.setName(name);
+//        person.setSurname(surname);
+//        person.setEmail(email);
+//
+//        //Добавляем человека в БД
+//
+//        model.addAttribute("person", person);
+//
+//        return "successPage";
+//    }
 
 //    @GetMapping("/new")
 //    public String newPerson(Model model) {
@@ -90,7 +92,10 @@ public class PeopleController {
 
     //а второй метод будет принимать на вход POST запрос, будет брать данные из этого запроса,
     @PostMapping
-    public String create(@ModelAttribute("person") Person person) {
+    public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "people/new";
+        }
         //создает обьект
         //считывает данные из поля
         //помещает эти данные в обьект
@@ -113,7 +118,10 @@ public class PeopleController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("person") @Valid Person person,BindingResult bindingResult, @PathVariable("id") int id) {
+        if (bindingResult.hasErrors()){
+            return "people/edit";
+        }
         personDAO.update(id, person);
         return "redirect:/people";
     }
