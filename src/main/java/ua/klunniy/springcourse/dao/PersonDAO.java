@@ -6,6 +6,8 @@ import ua.klunniy.springcourse.models.Person;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -50,7 +52,7 @@ public class PersonDAO {
     //в этом методе мы просто возвращаем список из людей
     public List<Person> index() {
         List<Person> people = new ArrayList<>();
-        String sql = "SELECT * FROM Person";
+        String sql = "SELECT * FROM Person ";
         try {
             Statement statement = connection.createStatement();
 
@@ -70,6 +72,7 @@ public class PersonDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        Collections.sort(people);
         return people;
     }
 
@@ -90,7 +93,6 @@ public class PersonDAO {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 Gender gender = Gender.valueOf(rs.getString("gender"));
-
                 person = new Person(id, age, name, email, gender);
             }
         } catch (SQLException e) {
@@ -123,14 +125,15 @@ public class PersonDAO {
 //        personToBeUpdated.setEmail(updatePerson.getEmail());
 //        personToBeUpdated.setAge(updatePerson.getAge());
 
-        if (updatePerson != null && id != null) {
-            String sql = "UPDATE Person SET age=?, name=?, email=?, gender=?::gender";
+        if (updatePerson != null && id > 0) {
+            String sql = "UPDATE Person SET age=?, name=?, email=?, gender=?::gender where id=?";
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setLong(1, updatePerson.getAge());
                 preparedStatement.setString(2, updatePerson.getName());
                 preparedStatement.setString(3, updatePerson.getEmail());
                 preparedStatement.setString(4, updatePerson.getGender().name());
+                preparedStatement.setLong(5, id);
                 //executeUpdate() -
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
@@ -145,7 +148,6 @@ public class PersonDAO {
         try {
             PreparedStatement ps =
                     connection.prepareStatement("DELETE FROM Person where id=?");
-
             ps.setLong(1, id);
             //executeQuery - он не изменяет данные в БД, он получает данные
             ps.executeUpdate();
