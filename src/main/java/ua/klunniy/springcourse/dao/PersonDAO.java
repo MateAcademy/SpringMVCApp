@@ -53,6 +53,8 @@ public class PersonDAO {
         String sql = "SELECT * FROM Person";
         try {
             Statement statement = connection.createStatement();
+
+            //executeQuery - он не изменяет данные в БД, он получает данные
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
@@ -74,7 +76,28 @@ public class PersonDAO {
     //второй метод возвращает одного человека
     public Person show(int id) {
         //return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
-        return null;
+        Person person = null;
+
+        try {
+            PreparedStatement ps =
+                    connection.prepareStatement("SELECT * FROM Person where id=?");
+
+            ps.setLong(1, id);
+            //executeQuery - он не изменяет данные в БД, он получает данные
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int age = rs.getInt("age");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                Gender gender = Gender.valueOf(rs.getString("gender"));
+
+                person = new Person(id, age, name, email, gender);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return person;
     }
 
     public static void main(String[] args) {
@@ -91,6 +114,7 @@ public class PersonDAO {
                 preparedStatement.setString(2, person.getName());
                 preparedStatement.setString(3, person.getEmail());
                 preparedStatement.setString(4, person.getGender().name());
+                //executeUpdate() -
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
