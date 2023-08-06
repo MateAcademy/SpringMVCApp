@@ -8,6 +8,11 @@
 
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
     <div> <!--  label ?????? ???????? ???? ????? ?????? ???? ???????:-->
+        <label for="age">Age</label>
+        <input name="age" type="text" th:field="*{age}" id="age"/>
+        <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+        <br/>
+
         <label for="name">Name</label>
         <!--  input ??? ???, ??????? ??????? ???? ??? ?????-->
         <input name="name" type="text" th:field="*{name}" id="name"/>
@@ -15,14 +20,14 @@
 
         <br/>
 
-        <label for="surname">Surname</label>
-        <input name="surname" type="text" th:field="*{surname}" id="surname"/>
-        <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
-        <br/>
-
         <label for="email">Email</label>
         <input name="email" type="text" th:field="*{email}" id="email"/>
         <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+        <br/>
+
+        <label for="gender">Gender</label>
+        <input name="gender" type="text" th:field="*{gender}" id="gender"/>
+        <div style="color: red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender Error</div>
         <br/>
 
         <input type="submit" value="Add New Person/ Create"/>

@@ -21,6 +21,6 @@ public class EmployeeDto {
 
     public String getFullName() {return firstName.concat(" ").concat(lastName);}
 
-    public boolean isMan() {return Gender.MALE.equals(gender);}
+   // public boolean isMan() {return Gender.MALE.equals(gender);}
 
 }

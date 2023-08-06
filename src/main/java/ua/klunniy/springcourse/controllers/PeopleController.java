@@ -62,20 +62,12 @@ public class PeopleController {
         return "people/show"; //будет отображать одного человека
     }
 
-//    @PostMapping("/create")
-//    public String create(@RequestParam("name") String name, @RequestParam("surname") String surname,
-//                         @RequestParam("email") String email, Model model) {
-//        Person person = new Person();
-//        person.setName(name);
-//        person.setSurname(surname);
-//        person.setEmail(email);
-//
-//        //Добавляем человека в БД
-//
-//        model.addAttribute("person", person);
-//
-//        return "successPage";
-//    }
+    @PostMapping("/")
+    public String create(@ModelAttribute("person") Person person) {
+        //Добавляем человека в БД
+        personDAO.save(person);
+        return "successPage";
+    }
 
 //    @GetMapping("/new")
 //    public String newPerson(Model model) {

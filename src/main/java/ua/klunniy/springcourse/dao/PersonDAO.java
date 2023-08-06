@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class PersonDAO {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/shop";
+    private static final String URL = "jdbc:postgresql://localhost:5432/first_db";
     private static final String LOGIN = "postgres";
     private static final String PASSWORD = "test";
 
@@ -49,10 +49,8 @@ public class PersonDAO {
 
     //в этом методе мы просто возвращаем список из людей
     public List<Person> index() {
-
         List<Person> people = new ArrayList<>();
         String sql = "SELECT * FROM Person";
-
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
@@ -67,13 +65,9 @@ public class PersonDAO {
                 Person person = new Person(id, age, name, email, gender);
                 people.add(person);
             }
-
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return people;
     }
 
@@ -89,10 +83,20 @@ public class PersonDAO {
     }
 
     public static void save(Person person) {
-//        if (person != null) {
-//            person.setId(++PEOPLE_COUNT);
-//            people.add(person);
-//        }
+        if (person != null) {
+            String sql = "Insert into Person( age, name, email, gender) values (?, ?, ?, ?::gender)";
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setLong(1, person.getAge());
+                preparedStatement.setString(2, person.getName());
+                preparedStatement.setString(3, person.getEmail());
+                preparedStatement.setString(4, person.getGender().name());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
     }
 
     public void update(int id, Person updatePerson) {
