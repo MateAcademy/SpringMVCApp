@@ -77,7 +77,6 @@ public class PersonDAO {
     public Person show(int id) {
         //return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
         Person person = null;
-
         try {
             PreparedStatement ps =
                     connection.prepareStatement("SELECT * FROM Person where id=?");
@@ -100,11 +99,6 @@ public class PersonDAO {
         return person;
     }
 
-    public static void main(String[] args) {
-        PersonDAO personDAO = new PersonDAO();
-        System.out.println(personDAO.show(2));
-    }
-
     public static void save(Person person) {
         if (person != null) {
             String sql = "Insert into Person( age, name, email, gender) values (?, ?, ?, ?::gender)";
@@ -119,7 +113,6 @@ public class PersonDAO {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 
@@ -129,9 +122,35 @@ public class PersonDAO {
 //        personToBeUpdated.setSurname(updatePerson.getSurname());
 //        personToBeUpdated.setEmail(updatePerson.getEmail());
 //        personToBeUpdated.setAge(updatePerson.getAge());
+
+        if (updatePerson != null && id != null) {
+            String sql = "UPDATE Person SET age=?, name=?, email=?, gender=?::gender";
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setLong(1, updatePerson.getAge());
+                preparedStatement.setString(2, updatePerson.getName());
+                preparedStatement.setString(3, updatePerson.getEmail());
+                preparedStatement.setString(4, updatePerson.getGender().name());
+                //executeUpdate() -
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public void delete(int id) {
         //people.removeIf(p -> p.getId() == id);
+        Person person = null;
+        try {
+            PreparedStatement ps =
+                    connection.prepareStatement("DELETE FROM Person where id=?");
+
+            ps.setLong(1, id);
+            //executeQuery - он не изменяет данные в БД, он получает данные
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
