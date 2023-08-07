@@ -3,6 +3,7 @@ package ua.klunniy.springcourse.dao;
 import org.springframework.stereotype.Component;
 import ua.klunniy.springcourse.enums.Gender;
 import ua.klunniy.springcourse.models.Person;
+import ua.klunniy.springcourse.utils.PersonComparatorById;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class PersonDAO {
     //в этом методе мы просто возвращаем список из людей
     public List<Person> index() {
         List<Person> people = new ArrayList<>();
-        String sql = "SELECT * FROM Person ";
+        String sql = "SELECT * FROM Person order by id";
         try {
             Statement statement = connection.createStatement();
 
@@ -72,7 +73,7 @@ public class PersonDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        Collections.sort(people);
+ //       Collections.sort(people, new PersonComparatorById());
         return people;
     }
 

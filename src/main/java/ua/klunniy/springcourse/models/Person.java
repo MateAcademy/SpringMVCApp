@@ -17,7 +17,7 @@ import ua.klunniy.springcourse.enums.Gender;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Person implements Comparable<Person> {
+public class Person {
 
     long id;
     @Min(value = 0, message = "age should be greater then 0")
@@ -38,8 +38,4 @@ public class Person implements Comparable<Person> {
         this.age = age;
     }
 
-    @Override
-    public int compareTo(Person o) {
-        return (int) (id - o.getId());
-    }
 }
