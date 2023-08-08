@@ -66,9 +66,9 @@ public class PersonDAO {
         //       return jdbcTemplate.query("SELECT * FROM Person ORDER BY id", new PersonMapper());
         return jdbcTemplate.query("SELECT * FROM Person ORDER BY id", new BeanPropertyRowMapper<>(Person.class));
 
-//        List<Person> people = new ArrayList<>();
 //        String sql = "SELECT * FROM Person order by id";
 //        try {
+//        List<Person> people = new ArrayList<>();
 //            Statement statement = connection.createStatement();
 //
 //            //executeQuery - он не изменяет данные в БД, он получает данные
@@ -124,8 +124,8 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-         jdbcTemplate.update("INSERT INTO Person(age, name, email, gender) values (?, ?, ?, ?)",
-                         person.getAge(), person.getName(), person.getEmail(), person.getGender());
+         jdbcTemplate.update("INSERT INTO Person(age, name, email, gender) values (?, ?, ?, ?::gender                                                                                                                                                       )",
+                         person.getAge(), person.getName(), person.getEmail(), person.getGender().toString());
 
          //        if (person != null) {
 //            String sql = "Insert into Person(age, name, email, gender) values (?, ?, ?, ?::gender)";
@@ -144,8 +144,8 @@ public class PersonDAO {
     }
 
     public void update(int id, Person person) {
-        jdbcTemplate.update("UPDATE Person SET age=?, name=?, email=?, gender=? where id=?",
-                person.getAge(), person.getName(), person.getEmail(), person.getGender(), id);
+        jdbcTemplate.update("UPDATE Person SET age=?, name=?, email=?, gender=?::gender where id=?",
+                person.getAge(), person.getName(), person.getEmail(), person.getGender().toString(), id);
 
 //        Person personToBeUpdated = show(id);
 //        personToBeUpdated.setName(updatePerson.getName());
