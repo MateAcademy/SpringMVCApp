@@ -23,6 +23,15 @@ public class FirstController {
         return "first/hello";
     }
 
+    //так нельзя:
+//    @GetMapping("/hello")
+//    public String helloPage(Model model) {
+//        String name = (String) model.getAttribute("name");
+//        String surname = (String) model.getAttribute("surname");
+//        System.out.println("Hello " + name + " " + surname);
+//        return "first/hello";
+//    }
+
     @GetMapping("/hello-world")
     public String helloPage(@RequestParam(value = "name", required = false) String name,
                             @RequestParam(value = "surname", required = false) String surname,
@@ -45,7 +54,7 @@ public class FirstController {
                 case "subtraction" -> result = a - b;
                 case "division" -> result = (double) a / b;
             }
-        model.addAttribute("message", "Answer2: " + result);
+        model.addAttribute("message", "Answer: " + result);
         return "first/calculator";
     }
 

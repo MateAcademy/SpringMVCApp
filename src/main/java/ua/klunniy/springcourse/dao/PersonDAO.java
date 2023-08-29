@@ -64,7 +64,8 @@ public class PersonDAO {
     //в этом методе мы просто возвращаем список из людей
     public List<Person> index() {
         //       return jdbcTemplate.query("SELECT * FROM Person ORDER BY id", new PersonMapper());
-        return jdbcTemplate.query("SELECT * FROM Person ORDER BY id", new BeanPropertyRowMapper<>(Person.class));
+        return jdbcTemplate.query("SELECT * FROM Person ORDER BY id",
+                new BeanPropertyRowMapper<>(Person.class));
 
 //        String sql = "SELECT * FROM Person order by id";
 //        try {

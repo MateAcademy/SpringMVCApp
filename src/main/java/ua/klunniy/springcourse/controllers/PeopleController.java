@@ -23,13 +23,13 @@ public class PeopleController {
     *
     *
     *   С GET запросом вот по этому URL мы получим все записи:
-    *   GET     /post               Получаем все записи(READ)
+    *   GET     /posts               Получаем все записи(READ)
     *
     *   GET     /posts/:id          Получаем одну запись(READ)
     *   DELETE  /posts/:id          Удаляем запись(DELETE)
     *
-    *   GET     /post/new           HTML форма создания записи
-    *   POST    /post               Создаем новую запись(CREATE)
+    *   GET     /posts/new           HTML форма создания записи
+    *   POST    /posts               Создаем новую запись(CREATE)
     *
     *   GET     /posts/:id/edit     HTML форма редактирования записи
     *   PATCH   /posts/:id          Обновляем запись(UPDATE)
